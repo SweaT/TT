@@ -1,0 +1,42 @@
+databaseChangeLog:
+  - changeSet:
+      id: create-player-table
+      author: admin
+      preConditions:
+        - onFail: MARK_RAN
+        - not:
+            - tableExists:
+                tableName: player
+      changes:
+        - createTable:
+            tableName: player
+            remarks: "Таблица игроков"
+            columns:
+              - column:
+                  name: id
+                  type: uuid
+                  remarks: "id игрока"
+                  constraints:
+                    primaryKey: true
+                  defaultValueComputed: gen_random_uuid()
+              - column:
+                  name: name
+                  type: varchar(255)
+                  remarks: "Имя/никнейм игрока"
+                  constraints:
+                    nullable: false
+              - column:
+                  name: country
+                  type: varchar(255)
+                  remarks: "Страна игрока"
+                  constraints:
+                    nullable: true
+              - column:
+                  name: team
+                  type: uuid
+                  constraints:
+                    nullable: false
+                    foreignKeyName: player_team_fkey
+                    referencedTableName: team
+                    referencedColumnNames: id
+

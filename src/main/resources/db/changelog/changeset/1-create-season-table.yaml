@@ -1,0 +1,39 @@
+databaseChangeLog:
+  - changeSet:
+      id: create-season-table
+      author: admin
+      preConditions:
+        - onFail: MARK_RAN
+        - not:
+            - tableExists:
+                tableName: season
+      changes:
+        - createTable:
+            tableName: season
+            remarks: "Таблица сезонов"
+            columns:
+              - column:
+                  name: id
+                  type: int
+                  remarks: "id сезона"
+                  constraints:
+                    primaryKey: true
+                  autoIncrement: true
+              - column:
+                  name: name
+                  type: varchar(255)
+                  remarks: "Название сезона"
+                  constraints:
+                    nullable: false
+              - column:
+                  name: season_starts
+                  type: date
+                  remarks: "Дата начала сезона"
+                  constraints:
+                    nullable: false
+              - column:
+                  name: season_ends
+                  type: date
+                  remarks: "Дата окончания сезона"
+                  constraints:
+                    nullable: false
