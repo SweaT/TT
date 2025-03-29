@@ -1,0 +1,63 @@
+databaseChangeLog:
+  - changeSet:
+      id: create-match-table
+      author: admin
+      preConditions:
+        - onFail: MARK_RAN
+        - not:
+            - tableExists:
+                tableName: match
+      changes:
+        - createTable:
+            tableName: match
+            remarks: "Таблица матчей"
+            columns:
+              - column:
+                  name: id
+                  type: uuid
+                  remarks: "id матча"
+                  constraints:
+                    primaryKey: true
+                  defaultValueComputed: gen_random_uuid()
+              - column:
+                  name: season
+                  type: int
+                  remarks: "Сезон, к котороому относится матч"
+                  constraints:
+                    foreignKeyName: match_season_fkey
+                    referencedTableName: season
+                    referencedColumnNames: id
+              - column:
+                  name: first_team
+                  type: uuid
+                  remarks: "Первая команда"
+                  constraints:
+                    nullable: false
+                    foreignKeyName: match_first_team_fkey
+                    referencedTableName: team
+                    referencedColumnNames: id
+              - column:
+                  name: second_team
+                  type: uuid
+                  remarks: "Вторая команда"
+                  constraints:
+                    nullable: false
+                    foreignKeyName: match_second_team_fkey
+                    referencedTableName: team
+                    referencedColumnNames: id
+              - column:
+                  name: date
+                  type: datetime
+                  remarks: "Дата проведения матча"
+                  constraints:
+                    nullable: false
+              - column:
+                  name: score
+                  type: varchar(255)
+                  remarks: "Счет"
+              - column:
+                  name: first_team_won
+                  type: boolean
+                  remarks: "true - выиграла первая команда, 
+                  false - выиграла вторая команда, 
+                  null - ничья"

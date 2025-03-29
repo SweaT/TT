@@ -1,0 +1,19 @@
+version: "3"
+
+services:
+  db:
+    ports:
+      - "5432:5432"
+    image: postgres:latest
+    container_name: my_db
+    environment:
+      POSTGRES_DB: my_db
+      POSTGRES_USER: me
+      POSTGRES_PASSWORD: pass
+      POSTGRES_HOST_AUTH_METHOD: trust
+    networks:
+      - a-tink-test
+
+networks:
+  a-tink-test:
+    driver: bridge

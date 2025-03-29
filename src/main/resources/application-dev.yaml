@@ -1,0 +1,15 @@
+spring:
+  datasource:
+    driver-class-name: org.postgresql.Driver
+    url: jdbc:postgresql://${db.url}:${db.port}/${db.name}
+    password: ${db.pass}
+    username: ${db.username}
+
+  liquibase:
+    change-log: db/changelog/db.changelog-master.yaml
+    password: ${db.pass}
+    user: ${db.username}
+
+  jpa:
+    database: postgresql
+    show-sql: true

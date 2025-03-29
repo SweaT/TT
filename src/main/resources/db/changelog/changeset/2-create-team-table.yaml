@@ -1,0 +1,33 @@
+databaseChangeLog:
+  - changeSet:
+      id: create-team-table
+      author: admin
+      preConditions:
+        - onFail: MARK_RAN
+        - not:
+            - tableExists:
+                tableName: team
+      changes:
+        - createTable:
+            tableName: team
+            remarks: "Таблица команд"
+            columns:
+              - column:
+                  name: id
+                  type: uuid
+                  remarks: "id команды"
+                  constraints:
+                    primaryKey: true
+                  defaultValueComputed: gen_random_uuid()
+              - column:
+                  name: name
+                  type: varchar(255)
+                  remarks: "Название команды"
+                  constraints:
+                    nullable: false
+              - column:
+                  name: country
+                  type: varchar(255)
+                  remarks: "Страна команды"
+                  constraints:
+                    nullable: true
