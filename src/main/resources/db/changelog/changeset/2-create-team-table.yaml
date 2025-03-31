@@ -6,10 +6,10 @@ databaseChangeLog:
         - onFail: MARK_RAN
         - not:
             - tableExists:
-                tableName: team
+                tableName: teams
       changes:
         - createTable:
-            tableName: team
+            tableName: teams
             remarks: "Таблица команд"
             columns:
               - column:

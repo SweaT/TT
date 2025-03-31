@@ -1,0 +1,44 @@
+databaseChangeLog:
+  - changeSet:
+      id: 0
+      author: admin
+      preConditions:
+        - onFail: MARK_RAN
+        - not:
+            - tableExists:
+                tableName: users
+      changes:
+        - createTable:
+            tableName: users
+            remarks: "Таблица пользователей системы"
+            columns:
+              - column:
+                  name: login
+                  type: varchar(64)
+                  remarks: "login пользователя"
+                  constraints:
+                    primaryKey: true
+                    primaryKeyName: user_login_pk
+              - column:
+                  name: password
+                  type: varchar(128)
+                  remarks: "Пароль"
+                  constraints:
+                    primaryKey: true
+                    primaryKeyName: user_password_pk
+              - column:
+                  name: name
+                  type: varchar(255)
+                  remarks: "Имя/никнейм пользователя"
+                  constraints:
+                    nullable: false
+                    unique: true
+                    uniqueConstraintName: user_name_unique_constraint
+                  defaultValueComputed: "'user_' || MD5(RANDOM()::TEXT)"
+              - column:
+                  name: role
+                  type: varchar(64)
+                  constraints:
+                    nullable: false
+                    notNullConstraintName: user_role_nnull
+                  defaultValue: "USER"
