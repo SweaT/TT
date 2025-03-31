@@ -1,15 +1,18 @@
 package com.example.TT.service;
 
-import com.example.TT.persistent.model.MatchEntity;
-import com.example.TT.persistent.model.PlayerEntity;
-import com.example.TT.persistent.model.TeamEntity;
+import com.example.TT.dto.MatchDTO;
+import com.example.TT.dto.PlayerDTO;
+import com.example.TT.dto.SeasonDTO;
+import com.example.TT.dto.TeamDTO;
 
 public interface AdminService {
 
-    MatchEntity createMatch(MatchEntity match);
+    MatchDTO createMatch(MatchDTO match);
 
-    TeamEntity createTeam(TeamEntity team);
+    TeamDTO createTeam(TeamDTO team);
 
-    PlayerEntity createPlayer(PlayerEntity player);
+    PlayerDTO createPlayer(PlayerDTO player);
+
+    SeasonDTO createSeason(SeasonDTO season);
 
 }
