@@ -6,10 +6,10 @@ databaseChangeLog:
         - onFail: MARK_RAN
         - not:
             - tableExists:
-                tableName: player
+                tableName: players
       changes:
         - createTable:
-            tableName: player
+            tableName: players
             remarks: "Таблица игроков"
             columns:
               - column:
@@ -37,6 +37,6 @@ databaseChangeLog:
                   constraints:
                     nullable: false
                     foreignKeyName: player_team_fkey
-                    referencedTableName: team
+                    referencedTableName: teams
                     referencedColumnNames: id
 

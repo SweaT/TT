@@ -6,10 +6,10 @@ databaseChangeLog:
         - onFail: MARK_RAN
         - not:
             - tableExists:
-                tableName: match
+                tableName: matches
       changes:
         - createTable:
-            tableName: match
+            tableName: matches
             remarks: "Таблица матчей"
             columns:
               - column:
@@ -25,7 +25,7 @@ databaseChangeLog:
                   remarks: "Сезон, к котороому относится матч"
                   constraints:
                     foreignKeyName: match_season_fkey
-                    referencedTableName: season
+                    referencedTableName: seasons
                     referencedColumnNames: id
               - column:
                   name: first_team
@@ -34,7 +34,7 @@ databaseChangeLog:
                   constraints:
                     nullable: false
                     foreignKeyName: match_first_team_fkey
-                    referencedTableName: team
+                    referencedTableName: teams
                     referencedColumnNames: id
               - column:
                   name: second_team
@@ -43,7 +43,7 @@ databaseChangeLog:
                   constraints:
                     nullable: false
                     foreignKeyName: match_second_team_fkey
-                    referencedTableName: team
+                    referencedTableName: teams
                     referencedColumnNames: id
               - column:
                   name: date

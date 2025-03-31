@@ -5,6 +5,7 @@ spring:
     password: ${db.pass}
     username: ${db.username}
 
+
   liquibase:
     change-log: db/changelog/db.changelog-master.yaml
     password: ${db.pass}
@@ -13,3 +14,11 @@ spring:
   jpa:
     database: postgresql
     show-sql: true
+    generate-ddl: false
+    hibernate:
+      ddl-auto: none
+    open-in-view: false
+
+logging:
+  level:
+    root: info

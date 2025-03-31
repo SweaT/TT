@@ -6,10 +6,10 @@ databaseChangeLog:
         - onFail: MARK_RAN
         - not:
             - tableExists:
-                tableName: season
+                tableName: seasons
       changes:
         - createTable:
-            tableName: season
+            tableName: seasons
             remarks: "Таблица сезонов"
             columns:
               - column:
