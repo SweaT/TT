@@ -12,4 +12,5 @@ public class SuperMapper {
     private final TeamMapper teamMapper;
     private final SeasonMapper seasonMapper;
     private final PlayerMapper playerMapper;
+    private final EventMapper eventMapper;
 }

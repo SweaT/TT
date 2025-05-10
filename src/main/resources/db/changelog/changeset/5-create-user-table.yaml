@@ -1,6 +1,6 @@
 databaseChangeLog:
   - changeSet:
-      id: 0
+      id: create-user-table
       author: admin
       preConditions:
         - onFail: MARK_RAN
@@ -24,8 +24,8 @@ databaseChangeLog:
                   type: varchar(128)
                   remarks: "Пароль"
                   constraints:
-                    primaryKey: true
-                    primaryKeyName: user_password_pk
+                    nullable: false
+                    notNullConstraintName: users_password_nnull
               - column:
                   name: name
                   type: varchar(255)

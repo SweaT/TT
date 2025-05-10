@@ -1,0 +1,34 @@
+databaseChangeLog:
+  - changeSet:
+      id: create-subscribers-table
+      author: admin
+      preConditions:
+        - onFail: MARK_RAN
+        - not:
+            - tableExists:
+                tableName: subscribers
+      changes:
+        - createTable:
+            tableName: subscribers
+            remarks: "Таблица для хранения списка подписчиков на события"
+            columns:
+              - column:
+                  name: login
+                  type: varchar(64)
+                  remarks: "login пользователя"
+                  constraints:
+                    primaryKey: true
+                    primaryKeyName: subscribers_login_pk
+                    referencedTableName: users
+                    referencedColumnNames: login
+                    foreignKeyName: subscribers_login_fk
+              - column:
+                  name: event
+                  type: uuid
+                  remarks: "uuid ивента, на который подписался пользователь"
+                  constraints:
+                    primaryKey: true
+                    primaryKeyName: subscribers_event_pk
+                    referencedTableName: events
+                    referencedColumnNames: id
+                    foreignKeyName: subscribers_event_fk

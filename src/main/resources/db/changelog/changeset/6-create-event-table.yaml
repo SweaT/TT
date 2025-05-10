@@ -1,0 +1,36 @@
+databaseChangeLog:
+  - changeSet:
+      id: create-event-table
+      author: admin
+      preConditions:
+        - onFail: MARK_RAN
+        - not:
+            - tableExists:
+                tableName: events
+      changes:
+        - createTable:
+            tableName: events
+            remarks: "Таблица для хранения списка ивентов, на которые можно подписаться"
+            columns:
+              - column:
+                  name: id
+                  type: uuid
+                  remarks: "uuid ивента"
+                  constraints:
+                    primaryKey: true
+                    primaryKeyName: events_pk
+                  defaultValueComputed: gen_random_uuid()
+              - column:
+                  name: event_type
+                  type: varchar(64)
+                  remarks: "Тип ивента"
+                  constraints:
+                    nullable: false
+                    notNullConstraintName: events_event_type_nnull
+              - column:
+                  name: description
+                  type: varchar(512)
+                  remarks: "Описание события"
+                  constraints:
+                    nullable: false
+                    notNullConstraintName: events_description_nnull
