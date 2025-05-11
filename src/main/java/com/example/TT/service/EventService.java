@@ -7,7 +7,7 @@ import java.util.UUID;
 
 public interface EventService {
 
-    List<EventDTO> getAllUserEvents(String login);
+    List<EventDTO> getAllUserEvents(String login, boolean isTriggeredOnly);
 
     EventDTO createEvent(EventDTO eventDTO);
 

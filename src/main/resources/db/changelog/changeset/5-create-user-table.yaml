@@ -32,9 +32,15 @@ databaseChangeLog:
                   remarks: "Имя/никнейм пользователя"
                   constraints:
                     nullable: false
-                    unique: true
-                    uniqueConstraintName: user_name_unique_constraint
                   defaultValueComputed: "'user_' || MD5(RANDOM()::TEXT)"
+              - column:
+                  name: email
+                  type: varchar(255)
+                  remarks: "email пользователя"
+                  constraints:
+                    nullable: false
+                    unique: true
+                    uniqueConstraintName: user_email_unique_constraint
               - column:
                   name: role
                   type: varchar(64)

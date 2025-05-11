@@ -24,4 +24,7 @@ public class TeamEntity {
     @Column(name = "country", length = 255)
     private String country;
 
+    @Column(name = "emblem", length = 255)
+    private String emblem;
+
 }

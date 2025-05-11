@@ -13,6 +13,10 @@ import java.util.UUID;
 public interface EventRepository extends JpaRepository<EventEntity, UUID> {
 
     @Query("SELECT s.eventEntity FROM SubscriberEntity s WHERE s.user.login = :login")
-    List<EventEntity> findSubscribedEventsByLogin(@Param("login") String login);
+    List<EventEntity> findAllSubscribedEventsByLogin(@Param("login") String login);
+
+
+    @Query("SELECT s.eventEntity FROM SubscriberEntity s WHERE s.user.login = :login AND s.eventEntity.isTriggered = 'true'")
+    List<EventEntity> findTriggeredEventsByLogin(@Param("login") String login);
 
 }

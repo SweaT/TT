@@ -1,10 +1,6 @@
 package com.example.TT.persistent.model;
 
 import jakarta.persistence.*;
-import jakarta.persistence.Column;
-import jakarta.persistence.Entity;
-import jakarta.persistence.Id;
-import jakarta.persistence.Table;
 import lombok.*;
 
 @Getter
@@ -26,10 +22,14 @@ public class UserEntity {
     @Column(name = "password", length = 128, nullable = false)
     private String password;
 
-    @Column(name = "name", unique = true, nullable = false)
+    @Column(name = "name", nullable = false)
     private String name;
+
+    @Column(name = "email", unique = true, nullable = false)
+    private String email;
 
     @Column(name = "role", nullable = false)
     @Enumerated(EnumType.STRING)
     private UserRole role;
+
 }

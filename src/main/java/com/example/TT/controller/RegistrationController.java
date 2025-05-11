@@ -1,32 +1,31 @@
 package com.example.TT.controller;
 
+import com.example.TT.dto.UserDto;
+import com.example.TT.mapper.UserMapper;
 import com.example.TT.persistent.model.UserEntity;
-import com.example.TT.persistent.model.UserRole;
 import com.example.TT.persistent.repository.UserRepository;
 import lombok.RequiredArgsConstructor;
 import org.springframework.http.ResponseEntity;
 import org.springframework.security.crypto.password.PasswordEncoder;
-import org.springframework.web.bind.annotation.GetMapping;
+import org.springframework.web.bind.annotation.PostMapping;
+import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
 
 @RestController
-@RequestMapping("/cheats")
+@RequestMapping("/register")
 @RequiredArgsConstructor
-public class CHEATS {
+public class RegistrationController {
 
     private final UserRepository userRepository;
+    private final UserMapper userMapper;
     private final PasswordEncoder encoder;
 
-    @GetMapping("/create-admin")
-    public ResponseEntity<String> createUser() {
-        UserEntity user = new UserEntity();
-        user.setLogin("admin");
-        user.setPassword(encoder.encode("admin"));
-        user.setName("admin");
-        user.setEmail("admin@gmail.com");
-        user.setRole(UserRole.ADMIN);
-        userRepository.save(user);
+    @PostMapping()
+    public ResponseEntity<String> createUser(@RequestBody UserDto user) {
+        UserEntity userEntity = userMapper.fromDtoToEntity(user);
+        userEntity.setPassword(encoder.encode(user.password()));
+        userRepository.save(userEntity);
         return ResponseEntity.ok().body("Success!");
     }
 

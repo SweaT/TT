@@ -1,13 +1,11 @@
 package com.example.TT.service.impl;
 
-import com.example.TT.persistent.model.UserEntity;
 import com.example.TT.persistent.repository.UserRepository;
 import lombok.RequiredArgsConstructor;
 import org.springframework.security.core.userdetails.User;
 import org.springframework.security.core.userdetails.UserDetails;
 import org.springframework.security.core.userdetails.UserDetailsService;
 import org.springframework.security.core.userdetails.UsernameNotFoundException;
-import org.springframework.security.crypto.password.PasswordEncoder;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 
@@ -24,7 +22,7 @@ public class AuthService implements UserDetailsService {
     public UserDetails loadUserByUsername(String login) throws UsernameNotFoundException {
         return userRepository.findByLogin(login)
                 .map(user -> new User(
-                        user.getName(),
+                        user.getLogin(),
                         user.getPassword(),
                         Collections.singleton(user.getRole())
                         )

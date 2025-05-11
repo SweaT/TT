@@ -34,3 +34,11 @@ databaseChangeLog:
                   constraints:
                     nullable: false
                     notNullConstraintName: events_description_nnull
+              - column:
+                  name: isTriggered
+                  type: boolean
+                  remarks: "Флаг того, что событие случилось"
+                  defaultValueBoolean: false
+                  constraints:
+                    nullable: false
+                    notNullConstraintName: events_isTriggered_nnull

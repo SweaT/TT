@@ -24,8 +24,9 @@ public class EventServiceImpl implements EventService {
     private final EventMapper eventMapper;
 
     @Override
-    public List<EventDTO> getAllUserEvents(String login) {
-        List<EventEntity> result = eventRepository.findSubscribedEventsByLogin(login);
+    public List<EventDTO> getAllUserEvents(String login, boolean isTriggeredOnly) {
+        List<EventEntity> result = isTriggeredOnly ? eventRepository.findTriggeredEventsByLogin(login)
+                : eventRepository.findAllSubscribedEventsByLogin(login);
         return result.stream()
                 .map(eventMapper::fromEntityToDto)
                 .toList();

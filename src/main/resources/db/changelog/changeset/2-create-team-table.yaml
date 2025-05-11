@@ -31,3 +31,9 @@ databaseChangeLog:
                   remarks: "Страна команды"
                   constraints:
                     nullable: true
+              - column:
+                  name: emblem
+                  type: varchar(255)
+                  remarks: "Название бакета/картинки из minio для герба команды"
+                  constraints:
+                    nullable: true

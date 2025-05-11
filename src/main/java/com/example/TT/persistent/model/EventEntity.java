@@ -26,4 +26,7 @@ public class EventEntity {
     @Column(name = "description", nullable = false)
     private String description;
 
+    @Column(name = "isTriggered", nullable = false)
+    private String isTriggered;
+
 }
