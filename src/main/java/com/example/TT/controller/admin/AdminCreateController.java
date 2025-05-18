@@ -21,6 +21,7 @@ public class AdminCreateController {
 
     private final AdminService adminService;
 
+    @PreAuthorize("hasAuthority('MANAGER')")
     @PostMapping("/match")
     public ResponseEntity<MatchDTO> createMatch(@RequestBody MatchDTO matchDTO) {
         MatchDTO result = adminService.createMatch(matchDTO);
@@ -33,6 +34,7 @@ public class AdminCreateController {
         return ResponseEntity.ok(result);
     }
 
+    @PreAuthorize("hasAuthority('MANAGER')")
     @PostMapping("/season")
     public ResponseEntity<SeasonDTO> createSeason(@RequestBody SeasonDTO seasonDTO) {
         SeasonDTO result = adminService.createSeason(seasonDTO);

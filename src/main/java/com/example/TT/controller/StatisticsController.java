@@ -21,14 +21,17 @@ public class StatisticsController {
 
     @GetMapping("/player")
     public ResponseEntity<PlayerStatisticsResponse> getPlayerStatistic(@RequestParam("id") UUID id) {
-
         return ResponseEntity.ok(statisticsService.getPlayerStatistics(id));
     }
 
     @GetMapping("/season")
     public ResponseEntity<SeasonStatisticsResponse> getSeasonStatistic(@RequestParam("id") Integer id) {
-
         return ResponseEntity.ok(statisticsService.getSeasonStatistics(id));
+    }
+
+    @GetMapping("/teamScore")
+    public ResponseEntity<Integer> getTeamScore(@RequestParam("id") UUID TeamId) {
+        return ResponseEntity.ok(statisticsService.getTeamScore(TeamId));
     }
 
 }

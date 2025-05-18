@@ -10,4 +10,6 @@ public interface StatisticsService {
     PlayerStatisticsResponse getPlayerStatistics(UUID id);
 
     SeasonStatisticsResponse getSeasonStatistics(Integer id);
+
+    Integer getTeamScore(UUID teamId);
 }

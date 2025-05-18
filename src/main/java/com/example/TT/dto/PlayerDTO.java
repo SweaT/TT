@@ -6,5 +6,6 @@ public record PlayerDTO(
         UUID id,
         String name,
         String country,
-        TeamDTO team) {
+        TeamDTO team,
+        Integer goals) {
 }

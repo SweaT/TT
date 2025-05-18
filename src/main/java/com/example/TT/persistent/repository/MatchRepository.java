@@ -20,6 +20,7 @@ public interface MatchRepository extends JpaRepository<MatchEntity, UUID> {
             WHERE m.firstTeam.id = :teamId OR m.secondTeam.id = :teamId""")
     List<MatchEntity> findMatchEntitiesByFirstTeamOrSecondTeamEagerOnly(@Param("teamId") UUID teamId);
 
+    @EntityGraph(attributePaths = {"season", "firstTeam", "secondTeam"})
     List<MatchEntity> findMatchEntitiesBySeasonId(@Param("seasonId") Integer seasonId);
 
 }

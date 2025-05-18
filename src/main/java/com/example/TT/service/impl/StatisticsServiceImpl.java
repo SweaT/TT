@@ -11,6 +11,7 @@ import com.example.TT.persistent.repository.SeasonRepository;
 import com.example.TT.persistent.repository.TeamRepository;
 import com.example.TT.service.StatisticsService;
 import lombok.RequiredArgsConstructor;
+import org.jetbrains.annotations.NotNull;
 import org.springframework.security.core.userdetails.UsernameNotFoundException;
 import org.springframework.stereotype.Service;
 
@@ -35,19 +36,12 @@ public class StatisticsServiceImpl implements StatisticsService {
         );
         UUID PlayersTeamId = player.team().id();
 
-        List<MatchDTO> matches = matchRepository.findMatchEntitiesByFirstTeamOrSecondTeamEagerOnly(PlayersTeamId)
-                .stream().map(each -> mapper.getMatchMapper().fromEntityToDto(each)).toList();
-
-        List<MatchDTO> wonMatches = matches.stream().filter(each -> {
-            boolean firstTeam = each.firstTeam().id().equals(PlayersTeamId) && each.firstTeamWon();
-            boolean secondTeam = each.secondTeam().id().equals(PlayersTeamId) && !each.firstTeamWon();
-            return firstTeam || secondTeam;
-        }).toList();
+        List<MatchDTO> wonMathces = getGetWonMathces(PlayersTeamId, false);
 
         return PlayerStatisticsResponse.builder()
                 .playerDTO(player)
-                .matchesWon(wonMatches.size())
-                .playedMathces(matches)
+                .matchesWon(wonMathces.size())
+                .playedMathces(wonMathces)
                 .build();
     }
 
@@ -55,5 +49,26 @@ public class StatisticsServiceImpl implements StatisticsService {
     public SeasonStatisticsResponse getSeasonStatistics(Integer id) {
         return new SeasonStatisticsResponse(matchRepository.findMatchEntitiesBySeasonId(id).size());
     }
+
+    @Override
+    public Integer getTeamScore(UUID teamId) {
+        return getGetWonMathces(teamId, true).stream()
+                .mapToInt(each -> each.firstTeamWon() == null ? 1 : 3)
+                .sum();
+    }
+
+    @NotNull
+    private List<MatchDTO> getGetWonMathces(UUID teamId, boolean withDraw) {
+        List<MatchDTO> matches = matchRepository.findMatchEntitiesByFirstTeamOrSecondTeamEagerOnly(teamId)
+                .stream().map(each -> mapper.getMatchMapper().fromEntityToDto(each)).toList();
+
+        return matches.stream().filter(each -> {
+            boolean draw = withDraw && each.firstTeamWon() == null;
+            boolean firstTeam = each.firstTeam().id().equals(teamId) && Boolean.TRUE.equals(each.firstTeamWon());
+            boolean secondTeam = each.secondTeam().id().equals(teamId) && Boolean.FALSE.equals(each.firstTeamWon());
+            return firstTeam || secondTeam || draw;
+        }).toList();
+    }
+
 
 }

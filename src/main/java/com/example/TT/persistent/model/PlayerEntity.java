@@ -2,8 +2,6 @@ package com.example.TT.persistent.model;
 
 import jakarta.persistence.*;
 import lombok.*;
-import org.hibernate.IdentifierLoadAccess;
-import org.hibernate.annotations.GenericGenerator;
 
 import java.util.UUID;
 
@@ -35,5 +33,8 @@ public class PlayerEntity {
             nullable = false
     )
     private TeamEntity team;
+
+    @Column(name = "goals")
+    private Integer goals;
 
 }

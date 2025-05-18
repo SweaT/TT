@@ -7,7 +7,10 @@ import org.springframework.security.core.GrantedAuthority;
 public enum UserRole implements GrantedAuthority {
 
     ADMIN("ADMIN"),
-    USER("USER");
+    USER("USER"),
+    TRAINER("TRAINER"),
+    MANAGER("MANAGER"),
+    PLAYER("PLAYER");
 
     private final String vale;
 

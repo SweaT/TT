@@ -39,4 +39,7 @@ databaseChangeLog:
                     foreignKeyName: player_team_fkey
                     referencedTableName: teams
                     referencedColumnNames: id
-
+              - column:
+                  name: goals
+                  type: integer
+                  remarks: "Количество забитых голов"

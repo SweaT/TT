@@ -20,6 +20,7 @@ public class AdminDeleteController {
 
     private final AdminService adminService;
 
+    @PreAuthorize("hasAuthority('MANAGER')")
     @PostMapping("/match")
     public ResponseEntity<DefaultRs> deleteMatch(@RequestBody UUID[] matchUids) {
         DefaultRs response = adminService.deleteMatches(matchUids);
@@ -32,6 +33,7 @@ public class AdminDeleteController {
         return ResponseEntity.status(response.statusCode()).body(response);
     }
 
+    @PreAuthorize("hasAuthority('MANAGER')")
     @PostMapping("/season")
     public ResponseEntity<DefaultRs> DeleteSeason(@RequestBody Integer[] seasonsUids) {
         DefaultRs response = adminService.deleteSeasons(seasonsUids);
